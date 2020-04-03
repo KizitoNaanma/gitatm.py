@@ -1,65 +1,132 @@
-print("welcome to access bank")
-restart=("Y")
-chances = 3
+import pyfiglet
+#design
+
+print(pyfiglet.figlet_format("Welcome to Patty Bank"))
+
+chances = 0
 balance = 100.64
-while chances >=0:
+pin = int(input("please enter your four digit pin: "))
+
+                                
+                                
+while chances < 3:
+  if pin == 1234:
+    break
+  else:
+    print("Wrong, Try Again!!")
     pin = int(input("please enter your four digit pin: "))
-    if pin == (1234):
-        print("pin accepted\n")
-        while restart not in("n", "NO", "no", "N"):
-            print("please press 1 for your balance\n")
-            print("press 2 to make your withdrawal\n")
-            print("press 3 to pay\n")
-            print("press 4 to return card\n")
-            option = int(input("what would you like to choose"))
-            if option == 1:
-                print (f"your balance is {balance}\n")
-                restart = input("would you like to continue?")
-                if restart in("n", "NO", "no", "N"):
-                    print("thank you")
-                    break
-                elif option == 2:
-                    option2 = ("Y")
-                    withdrawal = float(input("how much would you like to withdraw?"))
-                    if withdrawal in [10, 20, 40, 60, 80, 100]:
-                        balance = balance - withdrawal
-                        print("\nyour balance is now #", balance)
-                        restart = input("would you like to continue?")
-                        if restart in ("n", "NO", "no", "N"):
-                            print("thank you")
-                            break
-                        elif withdrawal != [10, 20, 40, 60, 80, 100]:
-                            print("invalid amount please retry\n")
-                            restart = ("Y")
-                            elif withdrawal == 1:
-                                withdrawal = float(input("please enter desired amount: "))
-                         elif option == 3:
-                             pay_in = float(input("how much would you like to withdraw?"))
-                             balance = balance + pay_in
-                             print("\n your balance is now #", balance)
-                             restart = input("would you like to go back?")
-                             if restart in("n", "NO", "no", "N"):
-                                 print("thank you")
-                                 break
-                          elif option == 4:
-                              print("please wait while your card is been returned.....\n")
-                              print("thank you for your service!")
-                              break
-                            else:
-                                print("please enter a correct number. \n")
-                                restart = ("Y")
-        
-
-              elif pin != (1234):
-                  print("incorrect password")
-                  chances = chances - 1
-                  if chances == 0:
-                      print("\n no more tries")
-                      break
-                                
-                                
+  chances = chances + 1
+  
+if chances == 3:
+  print("Your card has been blocked")
+  exit()
 
 
+while True:
+  option = int(input("what would you like to choose: \n 1 - Balance \t 2 - Withdraw \n\n 3 - Pay \t 4 - Transfer \n\n 5 - return card\n\n >>"))
+  if option == 1:
+    print (f"your balance is {balance}\n")
+    restart = input("would you like to continue? ")
+
+    if restart in ["n", "NO", "no", "N"]:
+      print("Thank you for banking with us")
+
+      break
+
+    else:
+      pass
+
+
+
+  elif option == 2:
+    withdrawal_option = float(input("How much do you want to withdraw? \n 1 - N10 \t 2 - N20 \n 3 - N50 \t 4 - N100 \n 5 - Other\n"))
+
+    if withdrawal_option == 1:
+      if balance > 10:
+        balance -= 10
+      else:
+        print("Sorry you dont have sufficient fund to withdraw!")
+
+    elif withdrawal_option == 2:
+      if balance > 20:
+        balance -= 20
+      else:
+        print("Sorry you dont have sufficient fund to withdraw!")
+
+    elif withdrawal_option == 3:
+      if balance > 50:
+        balance -= 50
+      else:
+        print("Sorry you dont have sufficient fund to withdraw!")
+
+    elif withdrawal_option == 4:
+      if balance > 100:
+        balance -= 100
+      else:
+        print("Sorry you dont have sufficient fund to withdraw!")
+
+    elif withdrawal_option == 5:
+      other_amount = int(input("How much do you want to withdraw? "))
+      if balance > other_amount:
+        balance -= other_amount
+      else:
+        print("Sorry you dont have sufficient fund to withdraw!")
+
+    else:
+      print("Option not valid!")
+
+    print(f"Your balance is now N{balance}")
+
+    restart = input("Would you like to continue? (y/n) ")
+    if restart in ["n", "NO", "no", "N"]:
+      print("Thank you for banking with us")
+      break
+    else:
+      pass
+
+  elif option == 3:
+    pay_in = float(input("How much do you want to deposit? \n >>> "))
+    balance += pay_in
+    print("Successful!")
+
+    restart = input("Would you like to continue? (y/n) ")
+    if restart in ["n", "NO", "no", "N"]:
+      print("Thank you for banking with us")
+      break
+    else:
+      pass
+
+  elif option == 4:
+    transfer_account = input("Enter account number to transfer to \n >>>")
+    transfer_amount = float(input("How much do you want to transfer? \n >>>"))
+
+    if transfer_amount < balance:
+      confirmation = input(f"Are you sure you want to transfer to {transfer_account} (y/n)")
+      if confirmation == "y":
+        balance -= transfer_amount
+        print("Successful!")
+      elif confirmation == "n":
+        pass
+      else:
+        print("Invalid option")
+        confirmation = input(f"Are you sure you want to transfer to {transfer_account} (y/n)")
+    else:
+      print("Sorry transfer wasn't Successful. Invalid funds")
+
+    restart = input("Would you like to continue? (y/n) ")
+    if restart in ["n", "NO", "no", "N"]:
+      print("Thank you for banking with us")
+      break
+    else:
+      pass
+
+  elif option == 5:
+    print("Thank you for banking with us")
+
+    exit()
+
+  else:
+    print("Invalid option!")
 
 
 

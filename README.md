@@ -1,2 +1,2 @@
-run the code below first
+run the code first
 pip install -r requirements.txt
